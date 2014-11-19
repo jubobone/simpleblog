@@ -8,15 +8,18 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 	<http pattern="/css/**" security="none" />
 	<http pattern="/js/**" security="none" />
 	<http pattern="/img/**" security="none" />
-	<http pattern="/login.html*" security="none" />
+	<http pattern="/fonts/**" security="none" />
 	<http auto-config="true">
-		<intercept-url pattern="/member.html" access="ROLE_ADMIN,ROLE_USER" />
-		<intercept-url pattern="/edit.html" access="ROLE_ADMIN,ROLE_USER" />
+		<intercept-url pattern="/login" access="ROLE_ANONYMOUS" />
+		<intercept-url pattern="/register" access="ROLE_ANONYMOUS" />
+		<intercept-url pattern="/greetings" access="ROLE_ANONYMOUS" />
+		<intercept-url pattern="/addgreeting.html" access="ROLE_ADMIN,ROLE_USER" />
+		<intercept-url pattern="/restrictedarea.html" access="ROLE_ADMIN" />
 
-		<form-login login-page="/login.html" default-target-url="/member.html"
-			authentication-failure-url="/loginfailed.html" />
+		<form-login login-page="/login" default-target-url="/greetings"
+			authentication-failure-url="/accessdenied" />
 
-		<logout logout-success-url="/logout.html" />
+		<logout logout-success-url="/logout" />
 	</http>
 	
 	<authentication-manager>
@@ -24,7 +27,7 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 			<password-encoder hash="md5"/>
 			<jdbc-user-service data-source-ref="dataSource"
 				users-by-username-query="select username,password, enabled from user where username=?"
-				authorities-by-username-query="select u.username, r.role_mapping from user u, roles r where u.role_id = r.id and u.username = ? " />
+				authorities-by-username-query="select u.username, r.role_name from user u, role r where u.role_id = r.role_id and u.username = ? " />
 		</authentication-provider>
 	</authentication-manager>
 	

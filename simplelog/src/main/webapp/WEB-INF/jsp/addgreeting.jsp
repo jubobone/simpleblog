@@ -14,7 +14,7 @@
 <body>
  
 <h1>Spring Greetings</h1>
-<form:form action="greetings.html" modelAttribute="greetingform"> 	
+<form:form action="greetings" modelAttribute="greetingform"> 	
 	<table>
 		<tr>
 			<td>Add your greeting:</td>

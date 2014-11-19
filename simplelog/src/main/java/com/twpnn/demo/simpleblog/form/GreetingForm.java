@@ -1,7 +1,7 @@
 package com.twpnn.demo.simpleblog.form;
 
-import com.twpnn.demo.simpleblog.entity.Color;
-import com.twpnn.demo.simpleblog.entity.Greeting;
+import com.twpnn.demo.simpleblog.model.Color;
+import com.twpnn.demo.simpleblog.model.Greeting;
 
 public class GreetingForm {
 	// the domain model persistent data

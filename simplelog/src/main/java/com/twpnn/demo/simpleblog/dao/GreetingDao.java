@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.twpnn.demo.simpleblog.entity.Greeting;
+import com.twpnn.demo.simpleblog.model.Greeting;
 
 @Repository
 public class GreetingDao {
@@ -22,8 +22,8 @@ public class GreetingDao {
 
 	public List<Greeting> getAllGreetings() {
 		Session session = sessionFactory.getCurrentSession();
-		Query q = session
-				.createQuery("select g from Greeting g order by id desc");
+		session.beginTransaction();
+		Query q = session.createQuery("select g from Greeting g order by id desc");
 		List<Greeting> greetingList = q.list();
 		return greetingList;
 	}

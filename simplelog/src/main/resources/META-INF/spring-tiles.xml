@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE tiles-definitions PUBLIC
-"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
-"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<!-- Default Main Template -->
 	<definition name=".mainTemplate" template="/WEB-INF/jsp/layout/template.jsp">
@@ -9,6 +9,12 @@
 		<put-attribute name="header" value="/WEB-INF/jsp/layout/header.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/jsp/layout/footer.jsp" />
 		<put-attribute name="body" value="/WEB-INF/jsp/layout/blank.jsp" />
+	</definition>
+	<definition name=".loginTemplate" template="/WEB-INF/jsp/layout/template.jsp">
+		<put-attribute name="title" value="Welcome back" type="string" />
+		<put-attribute name="header" value="" />
+		<put-attribute name="footer" value="" />
+		<put-attribute name="body" value="" />
 	</definition>
 	<definition name="member" extends=".mainTemplate">
 		<put-attribute name="title" value="Member" type="string" />
@@ -23,12 +29,12 @@
 			type="string" />
 		<put-attribute name="body" value="/WEB-INF/jsp/edit.jsp" />
 	</definition>
-	<definition name="login" extends=".mainTemplate">
-		<put-attribute name="title" value="Loging page" type="string" />
-		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
-	</definition>
 	<definition name="show" extends=".mainTemplate">
-		<put-attribute name="title" value="Member" type="string" />
-		<put-attribute name="body" value="/WEB-INF/jsp/show.jsp" />
+		<put-attribute name="title" value="First page" type="string" />
+		<put-attribute name="body" value="/WEB-INF/jsp/greetings.jsp" />
+	</definition>
+	<definition name="login" extends=".loginTemplate">
+		<put-attribute name="title" value="Welcome back" type="string" />
+		<put-attribute name="body" value="/WEB-INF/jsp/login.jsp" />
 	</definition>
 </tiles-definitions>

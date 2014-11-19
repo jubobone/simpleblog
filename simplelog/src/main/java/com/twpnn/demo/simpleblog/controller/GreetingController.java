@@ -7,18 +7,20 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.twpnn.demo.simpleblog.entity.Color;
-import com.twpnn.demo.simpleblog.entity.Greeting;
 import com.twpnn.demo.simpleblog.form.GreetingForm;
+import com.twpnn.demo.simpleblog.model.Color;
+import com.twpnn.demo.simpleblog.model.Greeting;
+import com.twpnn.demo.simpleblog.model.User;
 import com.twpnn.demo.simpleblog.service.GreetingService;
 
 @Controller
-@RequestMapping("/home")
+//@RequestMapping("/")
 public class GreetingController {
 
 	protected static Logger logger = Logger.getLogger("GreetingController");
@@ -26,8 +28,10 @@ public class GreetingController {
 	@Autowired
 	private GreetingService greetingService;
 
+	//public GreetingController() {}
+	
 	// note there is no actual greetings.html file!!
-	@RequestMapping(value = "/addgreeting.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/addgreeting", method = RequestMethod.GET)
 	public String showAddGreetingPage(
 			@ModelAttribute("greetingform") GreetingForm greetingForm) {
 
@@ -55,33 +59,34 @@ public class GreetingController {
 		return colorList;
 	}
 
-	@RequestMapping(value = "/greetings.html", method = RequestMethod.POST)
+	//@Secured("ROLE_ADMIN")
+	@RequestMapping(value = "/greetings", method = RequestMethod.POST)
 	public String addGreetingAndShowAll(
 			@ModelAttribute("greetingform") GreetingForm greetingForm,
 			Map<String, Object> model) {
 
 		logger.info("entering addGreetingAndShowAll()");
-
+		 
 		Greeting greeting = greetingForm.getGreeting();
 		greeting.setGreetingDate(new Date());
-		greetingService.addGreeting(greeting);
-
+		org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		greeting.setUsername(user.getUsername());
+		greetingService.addGreeting(greeting);  
+ 
 		List<Greeting> greetings = greetingService.getAllGreetings();
 		model.put("greetinglist", greetings);
-
-		String selectedColorCode = greetingForm.getColor().getColorCode();
-		if (selectedColorCode.equals("")) { // if no color selected, then make
-											// default white
-			selectedColorCode = "FFFFFF";
-		}
-		model.put("colorcode", selectedColorCode);
-
-		// This will resolve to /WEB-INF/jsp/greetings.jsp
-		return "greetings";
+ 
+	    	String selectedColorCode=greetingForm.getColor().getColorCode(); 
+	    	if(selectedColorCode.equals("")) //if no color selected, then make default white
+	    		selectedColorCode="FFFFFF";
+	    	model.put("colorcode", selectedColorCode);
+ 
+	    	// This will resolve to /WEB-INF/jsp/greetings.jsp
+	    	return "greetings";
 	}
 
 	// define the same url with GET so users can skip to the greetings page
-	@RequestMapping(value = "/greetings.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/greetings", method = RequestMethod.GET)
 	public String showAllGreetings(Map<String, Object> model) {
 
 		logger.info("entering showAllGreetings");
@@ -90,7 +95,6 @@ public class GreetingController {
 		model.put("greetinglist", greetings);		
 		model.put("colorcode", "FFFFFF");
 
-		// This will resolve to /WEB-INF/jsp/greetings.jsp
-		return "greetings";
+		return "show"; // use tile definition instead of jsp page name
 	}
 }

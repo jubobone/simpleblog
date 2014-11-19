@@ -13,7 +13,7 @@
 	<properties>
 		<spring.version>4.1.1.RELEASE</spring.version>
 		<spring.security.version>3.2.5.RELEASE</spring.security.version>
-		<hibernate.version>4.3.5.Final</hibernate.version>
+		<hibernate.version>3.6.3.Final</hibernate.version>
 	</properties>
 
 	<dependencies>
@@ -51,10 +51,14 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${spring.security.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
 			<version>${spring.security.version}</version>
 		</dependency>
 
@@ -63,6 +67,11 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javassist</groupId>
+			<artifactId>javassist</artifactId>
+			<version>3.12.1.GA</version>
 		</dependency>
 
 		<!-- Java EE -->
@@ -99,12 +108,29 @@
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
-			<version>3.0.0</version>
+			<version>3.1.0</version>
 		</dependency>
 		<dependency>
-			<groupId>opensymphony</groupId>
-			<artifactId>sitemesh</artifactId>
-			<version>2.4.2</version>
+			<groupId>org.webjars</groupId>
+			<artifactId>bootstrapvalidator</artifactId>
+			<version>0.5.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+			<version>3.0.5</version>
+		</dependency>
+		<!-- Handling JSON data -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.3.0</version>
 		</dependency>
 
 		<!-- Testing -->
@@ -123,7 +149,11 @@
 			<artifactId>spring-test</artifactId>
 			<version>4.1.1.RELEASE</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<version>4.0.0.M1</version>
+		</dependency>
 
 		<!-- Others -->
 		<dependency>

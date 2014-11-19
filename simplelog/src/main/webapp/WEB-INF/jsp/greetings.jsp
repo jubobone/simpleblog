@@ -2,22 +2,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
  
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
- 
-<html>
- 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  	<title>Spring Greetings</title>
-</head>
- 
 <body bgcolor='#<c:out value="${colorcode}" />'>
  
 <h1>Spring Greetings</h1>
- 
 <c:if test="${not empty greetinglist}" >
 	<c:forEach items="${greetinglist}" var="greeting">		
-			<br/><b>@Anonymous</b> says<br/>	
+			<br/><b>@<c:out value="${greeting.username}" /></b> says<br/>	
 			on <c:out value="${greeting.greetingDate}" /><br/>	
 			<c:out value="${greeting.greetingText}" /><br/>			
 	</c:forEach>	
@@ -26,8 +16,8 @@
 	There are no greetings yet. 
 </c:if>
  
-<p><a href="/springgreetings/home/addgreeting.html">Add greeting</a><br/>
-<a href="/springgreetings/">Home</a>
+<p><a href="/simpleblog/addgreeting">Add greeting</a><br/>
+<a href="/simpleblog/">Home</a><br/>
+<a href="<c:url value="j_spring_security_logout" />">logout</a>
  
 </body>
-</html>
